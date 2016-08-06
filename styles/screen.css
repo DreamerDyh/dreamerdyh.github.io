@@ -510,24 +510,6 @@ th {
   font-weight: 800;
   src: url("../fonts/opensans/800i.woff2") format('woff2'), url("../fonts/opensans/800i.woff") format('woff');
 }
-@font-face {
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/fira/400.woff2") format('woff2'), url("../fonts/fira/400.woff") format('woff');
-}
-@font-face {
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/fira/500.woff2") format('woff2'), url("../fonts/fira/500.woff") format('woff');
-}
-@font-face {
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/fira/700.woff2") format('woff2'), url("../fonts/fira/700.woff") format('woff');
-}
 html {
   font-size: 62.5%;
 }
@@ -594,7 +576,7 @@ header nav {
   z-index: 2;
 }
 header a {
-  color: #1d9cf7;
+  color: #fafafa;
   text-decoration: none;
 }
 header a:hover {
@@ -618,7 +600,7 @@ header img {
   width: auto;
 }
 header p {
-  color: #fafafa;
+  color: #ccc;
   font-family: 'Droid Serif', Georgia, serif;
   font-size: 1.62rem;
   font-weight: 400;
