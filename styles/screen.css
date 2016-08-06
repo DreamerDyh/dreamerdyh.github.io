@@ -427,30 +427,6 @@ th {
 }
 
 @font-face {
-  font-family: 'Droid Serif';
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/droidserif/400.woff2") format('woff2'), url("../fonts/droidserif/400.woff") format('woff');
-}
-@font-face {
-  font-family: 'Droid Serif';
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/droidserif/700.woff2") format('woff2'), url("../fonts/droidserif/700.woff") format('woff');
-}
-@font-face {
-  font-family: 'Droid Serif';
-  font-style: italic;
-  font-weight: 400;
-  src: url("../fonts/droidserif/400i.woff2") format('woff2'), url("../fonts/droidserif/400i.woff") format('woff');
-}
-@font-face {
-  font-family: 'Droid Serif';
-  font-style: italic;
-  font-weight: 700;
-  src: url("../fonts/droidserif/700i.woff2") format('woff2'), url("../fonts/droidserif/700i.woff") format('woff');
-}
-@font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
@@ -523,9 +499,9 @@ body {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-family: 'Droid Serif', Georgia, serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1.62rem;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.6em;
 }
 a {
@@ -552,11 +528,11 @@ main {
   padding: 20px;
 }
 header {
-  background-image: -webkit-linear-gradient(82deg, hsla(220,100%,12%,1), hsla(220,40%,4%,1) 50%);
-  background-image: -moz-linear-gradient(82deg, hsla(220,100%,12%,1), hsla(220,40%,4%,1) 50%);
-  background-image: -o-linear-gradient(82deg, hsla(220,100%,12%,1), hsla(220,40%,4%,1) 50%);
-  background-image: -ms-linear-gradient(82deg, hsla(220,100%,12%,1), hsla(220,40%,4%,1) 50%);
-  background-image: linear-gradient(8deg, hsla(220,100%,12%,1), hsla(220,40%,4%,1) 50%);
+  background-image: -webkit-linear-gradient(82deg, hsla(220,100%,15%,1), hsla(220,40%,4%,1) 50%);
+  background-image: -moz-linear-gradient(82deg, hsla(220,100%,15%,1), hsla(220,40%,4%,1) 50%);
+  background-image: -o-linear-gradient(82deg, hsla(220,100%,15%,1), hsla(220,40%,4%,1) 50%);
+  background-image: -ms-linear-gradient(82deg, hsla(220,100%,15%,1), hsla(220,40%,4%,1) 50%);
+  background-image: linear-gradient(8deg, hsla(220,100%,15%,1), hsla(220,40%,4%,1) 50%);
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -576,7 +552,7 @@ header nav {
   z-index: 2;
 }
 header a {
-  color: #fafafa;
+  color: #e0e0e0;
   text-decoration: none;
 }
 header a:hover {
@@ -586,7 +562,7 @@ header h1 {
   color: #1d9cf7;
   font-family: 'Open Sans', sans-serif;
   font-size: 4.5rem;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: -1px;
   text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
@@ -600,10 +576,10 @@ header img {
   width: auto;
 }
 header p {
-  color: #ccc;
-  font-family: 'Droid Serif', Georgia, serif;
+  color: #e0e0e0;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1.62rem;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0;
   margin: 0;
   text-shadow: 0 1px 3px rgba(0,0,0,0.35);
@@ -625,11 +601,11 @@ header nav ul li:last-child:after {
   content: '';
 }
 header .space {
-  -webkit-animation: slide 8s linear infinite;
-  -moz-animation: slide 8s linear infinite;
-  -o-animation: slide 8s linear infinite;
-  -ms-animation: slide 8s linear infinite;
-  animation: slide 8s linear infinite;
+  -webkit-animation: slide 15s linear infinite;
+  -moz-animation: slide 15s linear infinite;
+  -o-animation: slide 15s linear infinite;
+  -ms-animation: slide 15s linear infinite;
+  animation: slide 15s linear infinite;
   background-image: url("../images/stars.svg");
   background-position: center center;
   -webkit-background-size: 240px;
@@ -682,10 +658,9 @@ main a.article:hover h2 {
 }
 main .page-title {
   color: #a4a4a4;
-  font-family: 'Droid Serif', Georgia, serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1.62rem;
-  font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
   padding-bottom: 16px;
   text-align: center;
@@ -693,9 +668,9 @@ main .page-title {
 main .post-meta {
   color: #a4a4a4;
   display: inline-block;
-  font-family: 'Droid Serif', Georgia, serif;
-  font-weight: 400;
-  font-size: 1.62rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
   margin: 0;
 }
 main article.item {
@@ -705,6 +680,7 @@ main article.item {
   text-align: center;
 }
 main article.item h2 {
+  font-size: 3rem;
   break-word: normal;
   color: #141414;
   margin-bottom: 16px;
@@ -733,6 +709,9 @@ main article.item:after {
 }
 main article.full {
   padding-bottom: 20px;
+}
+main article.full h1 {
+  font-size: 3rem;
 }
 main article.full h2 {
   margin: 0;
@@ -1083,7 +1062,7 @@ h4,
 h5,
 h6 {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 1;
   margin-top: 0;
   margin-bottom: 20px;
@@ -1186,7 +1165,7 @@ tt {
   color: #fafafa;
   font-family: 'Fira Mono', monospace, sans-serif;
   font-size: 0.85em;
-  font-weight: 400;
+  font-weight: 300;
   padding: 1px 3px;
   white-space: pre-wrap;
 }
@@ -1201,7 +1180,7 @@ pre {
   color: #fafafa;
   font-family: 'Fira Mono', monospace, sans-serif;
   font-size: 0.9em;
-  font-weight: 400;
+  font-weight: 300;
   margin: 1.6em 0;
   overflow: auto;
   padding: 10px;
@@ -1226,7 +1205,7 @@ kbd {
   box-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 0 0 2px #fafafa inset;
   color: #666;
   display: inline-block;
-  font-family: 'Droid Serif', Georgia, serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 0.9em;
   margin-bottom: 0.4em;
   padding: 0 5px;
