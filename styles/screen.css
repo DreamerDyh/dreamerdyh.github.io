@@ -490,7 +490,7 @@ html {
   font-size: 62.5%;
 }
 body {
-  color: #4b4b4b;
+  color: #5c5c5c;
   margin: 0;
   height: 100vh;
   -webkit-box-orient: vertical;
@@ -517,7 +517,7 @@ a:hover {
 }
 ::-moz-selection,
 ::selection {
-  color: #4b4b4b;
+  color: #5c5c5c;
   background: #1d9cf7;
   text-shadow: none;
 }
@@ -635,7 +635,7 @@ main {
   word-wrap: break-word;
 }
 main a.article {
-  color: #4b4b4b;
+  color: #5c5c5c;
   text-decoration: none;
 }
 main a.article:last-of-type article {
@@ -675,14 +675,14 @@ main .post-meta {
 }
 main article.item {
   border-bottom: 1px solid rgba(0,0,0,0.15);
-  color: #4b4b4b;
+  color: #5c5c5c;
   padding: 40px;
   text-align: center;
 }
 main article.item h2 {
   font-size: 3rem;
   break-word: normal;
-  color: #4b4b4b;
+  color: #5c5c5c;
   margin-bottom: 16px;
   word-wrap: break-word;
 }
@@ -750,7 +750,7 @@ main article.full blockquote footer {
   padding: 0;
   border: 0;
   background: none;
-  color: #4b4b4b;
+  color: #5c5c5c;
   line-height: 1.6em;
   font-size: 0.9em;
 }
@@ -1043,11 +1043,11 @@ main footer {
   border: 1px solid #d3d3d3 1px solid;
   font-size: 1.3rem;
   line-height: 2.1em;
-  color: #a5a5a5;
+  color: #adadad;
   background: #ececec;
 }
 main footer :not(main) > a {
-  color: #6f6f6f;
+  color: #7d7d7d;
   font-weight: 700;
   text-decoration: none;
 }
