@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>关于Core Animation的一些总结思索 | 逐星</title><meta name="description"><meta name="generator" content="逐星"><meta name="author" content="Dai Yunhao"><meta name="keywords" content="iOS, 设计, 佛, 道"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="160x160" href="/images/favicon-160x160.png"><link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192x192.png"><meta name="msapplication-TileColor" content="#121315"><meta name="msapplication-TileImage" content="/images/mstile-144x144.png"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><a href="/"><img src="/images/zxtitle.png" alt="逐星" title="逐星"></a><!--h1//a(href= config.root, alt= config.title, title= config.title, itemprop='headline')= config.title--><p itemprop="description">应无所住，而生其心。</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/" alt="Home" title="Home" itemprop="url">Home</a></li><li itemprop="name"><a href="/about" alt="About" title="About" itemprop="url">About</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline">关于Core Animation的一些总结思索</h1><span class="post-meta">published on<time itemprop="datePublished" datetime="2016-08-29T11:19:58.000Z"> 2016-08-29 at 19:19</time><br>last updated on<time itemprop="dateModified" datetime="2016-08-29T11:19:58.000Z"> 2016-08-30 at 11:14</time></span><img src="/2016/08/29/关于Core-Animation的一些总结思索/jingsi.png" alt="jingsi.png" title="">
+<p>Core Animation是贯穿iOS开发始终的一个库，在之前的开发中已经多次用到里面的特性，却总感觉未能窥得冰山之下更多的东西。</p>
+<p>近日难得有闲时，翻出了两本书看，《iOS核心动画高级技巧》和《一本书读懂财报》，文字不愧是作者灵魂智慧的结晶，读完之后都有了一些新的感悟。</p>
+<p>iOS开发是我的爱好，也是我目前的职业，就先记录一下有关于Core Animation的一些感悟吧。</p>
+<p>当然，既然是感悟，我并不会事无巨细地去描述Core Animation到底是什么东西，怎么去敲代码，这篇文章的主旨是总结一下我读完书后，从一个做过很多动画的老iOS的角度，总结一些我未曾注意或意识不够的细节，即冰山之下的东西。</p>
+<blockquote>
+<p>Core Animation其实是一个令人误解的命名。</p>
+</blockquote>
+<p>《iOS核心动画高级技巧》的开篇如是说，确实如此，Core Animation不仅能做动画，它几乎是iOS设备的屏幕上能看到的所有东西的基础。</p>
+<p>首先来总结一些基本概念吧，对开发者来说，显示到屏幕上的任何东西都能追溯为一个UIView，每个UIView背后都有一个CALayer，而真正在屏幕上显示的，其实是CALayer，UIView是在CALayer的基础上，封装了一些人机交互和图形绘制管理的代码，因为这种绑定关系，很自然的，layer们也是用layer树管理起来的。</p>
+<p>既然UIView做了封装，就必然屏蔽了一些细节，诸如阴影，圆角，border，mask这样在设计稿中经常用到的东西，你都需要在layer这个级别去做。</p>
+<p>layer可以装载一个以任何形式创建的CGImage,可以像UIImageView一样管理，布局它，甚至还能做到多个layer共同使用一个大的CGImage，当然，每个layer可以只显示局部的内容。用Core Graphics绘制的东西其实也被装进了一个CGImage中。</p>
+<p>UIView常用的frame，bounds，center分别对应它绑定的CALayer的frame，bounds，position。frame事实上是一个计算出来的虚拟属性，在旋转一个view时，frame会和预期不符，此时bounds和center才能准确的描述这个view。</p>
+<p>hitTest方法会返回触点点到的叶子layer。</p>
+<p>在用affineTransform即仿射变换时，变换的顺序会影响最后的结果，先平移再旋转一般较好，因为旋转会改变view或者layer自身的x正向，再平移会导致不符合预期的结果。</p>
+<p>在做3d变换时，如果需要景深，需要将transform的m34改为 －1.0 ／ x 这样的值，x值一般介于500.0 - 1000.0即可。</p>
+<p>统一让所有的子layer需要景深，可以改变sublayersTransform属性的m34来实现这个效果，m34的修改会随着layer树向下传递。</p>
+<p>各种功能化的layer非常实用，尤其是CAShapeLayer，异常强大。</p>
+<blockquote>
+<p>Core Animation基于一个假设，说屏幕上的任何东西都可以（或者可能）做动画。</p>
+</blockquote>
+<p>在layer层面，所有animatable的属性更改都被默认的加上了一段0.25秒的动画，而在UIView中，这些隐式动画被禁用了。</p>
+<blockquote>
+<p>我们把改变属性时CALayer自动应用的动画称作Action，当CALayer的属性被修改时候，它会调用-actionForKey:方法，传递属性的名称。剩下的操作都在CALayer的头文件中有详细的说明，实质上是如下几步：</p>
+<ol>
+<li>layer首先检测它是否有委托，并且是否实现CALayerDelegate协议指定的-actionForLayer:forKey方法。如果有，直接调用并返回结果。</li>
+<li>如果没有委托，或者委托没有实现-actionForLayer:forKey方法，layer接着检查包含属性名称对应行为映射的actions字典。</li>
+<li>如果actions字典没有包含对应的属性，那么layer接着在它的style字典接着搜索属性名。</li>
+<li>最后，如果在style里面也找不到对应的行为，那么layer将会直接调用定义了每个属性的标准行为的-defaultActionForKey:方法。</li>
+</ol>
+</blockquote>
+<p>如果想改变隐式动画的实现，除了实现委托外，还可以去给layer的actions字典递值实现。</p>
+<blockquote>
+<p>当你改变一个layer的属性，属性值的确是立刻更新的（如果你读取它的数据，你会发现它的值在你设置它的那一刻就已经生效了），但是屏幕上并没有马上发生改变。这是因为你设置的属性并没有直接调整layer的外观，相反，他只是定义了layer动画结束之后将要变化的外观。</p>
+</blockquote>
+<p>在做显式动画时，当绝对值toValue不能很好的实现需求（如原地旋转2PI），用相对值byValue往往能很好的work。</p>
+<blockquote>
+<p>过渡动画首先展示之前的图层外观，然后通过一个交换过渡到新的外观。</p>
+</blockquote>
+<p>想在非animatable属性改变时做动画，用过渡动画transition即可。</p>
+<blockquote>
+<p>对一个动画来说，duration和repeatCount默认都是0。但这不意味着动画时长为0秒，或者0次，这里的0仅仅代表了“默认”，也就是0.25秒和1次。</p>
+</blockquote>
+<p>-</p>
+<blockquote>
+<p>创建重复动画的另一种方式是使用repeatDuration属性，它让动画重复一个指定的时间，而不是指定次数。<br>注意repeatCount和repeatDuration可能会相互冲突，所以你只要对其中一个指定非零值。对两个属性都设置非0值的行为没有被定义。</p>
+</blockquote>
+<p>-</p>
+<blockquote>
+<p>beginTime指定了动画开始之前的的延迟时间。这里的延迟从动画添加到可见图层的那一刻开始测量，默认是0（就是说动画会立刻执行）。<br>speed是一个时间的倍数，默认1.0，减少它会减慢图层/动画的时间，增加它会加快速度。如果2.0的速度，那么对于一个duration为1的动画，实际上在0.5秒的时候就已经完成了。<br>timeOffset和beginTime类似，但是和增加beginTime导致的延迟动画不同，增加timeOffset只是让动画快进到某一点，例如，对于一个持续1秒的动画来说，设置timeOffset为0.5意味着动画将从一半的地方开始。<br>和beginTime不同的是，timeOffset并不受speed的影响。所以如果你把speed设为2.0，把timeOffset设置为0.5，那么你的动画将从动画最后结束的地方开始，因为1秒的动画实际上被缩短到了0.5秒。然而即使使用了timeOffset让动画从结束的地方开始，它仍然播放了一个完整的时长，这个动画仅仅是循环了一圈，然后从头开始播放。</p>
+</blockquote>
+<p>-</p>
+<blockquote>
+<p>想要暂停动画，一个简单的方法是可以利用CAMediaTiming来暂停layer本身。如果把图层的speed设置成0，它会暂停任何添加到layer上的动画。类似的，设置speed大于1.0将会快进，设置成一个负值将会倒回动画。<br>通过设置主窗口layer的speed，可以暂停整个应用程序的动画。</p>
+</blockquote>
+<p>-</p>
+<blockquote>
+<p>timeOffset一个很有用的功能在于你可以它可以让你手动控制动画进程，通过设置speed为0，可以禁用动画的自动播放，然后来使用timeOffset来来回显示动画序列。这可以使得运用手势来手动控制动画变得很简单。</p>
+</blockquote>
+<p>还有很多渲染性能和runloop方面的知识，未完待续。</p>
+</article></main></body></html>
